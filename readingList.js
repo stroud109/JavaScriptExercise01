@@ -9,16 +9,16 @@ var Book = function(titleBook, genre, author, read, readDate) {
 var BookList = function() {
     this.booksRead = [];
     this.booksNotRead = [];
-    this.numRead = booksRead.length; // use len on a list
-    this.numNotRead = booksNotRead.length;
-    this.nextBook = booksNotRead[0];
-    this.lastBook = booksRead[booksRead.length-1];
+    this.numRead = this.booksRead.length; // use len on a list
+    this.numNotRead = this.booksNotRead.length;
+    this.nextBook = this.booksNotRead[0];
+    this.lastBook = this.booksRead[this.booksRead.length-1];
     this.bookShelf = [];
 
     this.addBook = function(book) {
         this.bookShelf.push(book);
-        console.log("This book has been successfully added.");
-        console.log("There are now " + bookShelf.length + "books on your bookshelf.");
+        bgh = document.getElementById("booksGoHere");
+        bgh.innerHTML += "This book has been successfully added.  There are now <strong>" + this.bookShelf.length + "</strong> books on your bookshelf.";
 
         if (book.read === true) {
             this.booksRead.push(book);
@@ -49,4 +49,5 @@ var stephList = new BookList();
 
 // var mylist = new BookList();
 stephList.addBook(hobbit);
+stephList.addBook(harryPotter);
 console.log(BookList);
