@@ -50,4 +50,3 @@ var stephList = new BookList();
 // var mylist = new BookList();
 stephList.addBook(hobbit);
 stephList.addBook(harryPotter);
-console.log(BookList);
