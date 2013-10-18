@@ -1,10 +1,25 @@
-var Book = function(titleBook, genre, author, read, readDate) {
-    this.titleBook = titleBook;
+var Book = function(title, genre, author, read, readDate) {
+    this.title = title;
     this.genre = genre;
     this.author = author;
     this.read = read;
     this.readDate = readDate;
     };
+
+var getBookTitles = function(listOfBooks) {
+    var bookTitles = [];
+    for (var i = 0; i < listOfBooks.length; i++) {
+        console.log(listOfBooks[i].title);
+        bookTitles.push(listOfBooks[i].title);
+        console.log(bookTitles);
+    }
+    return bookTitles;
+};
+
+var log = function(text) {
+    var bgh = document.getElementById("booksGoHere");
+        bgh.innerHTML += "<div>" + text + "</div>";
+};
 
 var BookList = function() {
     this.booksRead = [];
@@ -17,14 +32,17 @@ var BookList = function() {
 
     this.addBook = function(book) {
         this.bookShelf.push(book);
-        bgh = document.getElementById("booksGoHere");
-        bgh.innerHTML += "This book has been successfully added.  There are now <strong>" + this.bookShelf.length + "</strong> books on your bookshelf.";
+        log("You've added <strong>" + book.title + "</strong> to your your bookshelf.");
+        console.log(book);
 
         if (book.read === true) {
             this.booksRead.push(book);
+            log("You've added " + book.title + " to your list of completed books. You've read " + this.booksRead.length + " books.");
         }
-        else
+        else {
             this.booksNotRead.push(book);
+            log("You've added " + book.title + " to your list of books to read. You have " + this.booksNotRead.length + " books to read.");
+        }
     };
 
     this.finishCurrentBook = function() {
@@ -48,5 +66,9 @@ var stephList = new BookList();
 // var jeeList = new BookList(numRead, numNotRead, nextBook, currentBook, lastBook, bookShelf);
 
 // var mylist = new BookList();
-stephList.addBook(hobbit);
 stephList.addBook(harryPotter);
+stephList.addBook(cleopatra);
+stephList.addBook(pridePrejudice);
+stephList.addBook(penelopeDaughter);
+stephList.addBook(hobbit);
+
