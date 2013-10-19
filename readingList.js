@@ -4,11 +4,11 @@ var Book = function(bookTitle, genre, author, read, readDate) {
     this.author = author;
     this.read = read;
     this.readDate = readDate;
-    };
+};
 
 var log = function(text) {
     var bgh = document.getElementById("booksGoHere");
-        bgh.innerHTML += "<div>" + text + "</div>";
+        bgh.innerHTML += "<p>" + text + "</p>";
 };
 
 var BookList = function(name) {
