@@ -19,6 +19,32 @@ var BookList = function(name) {
     this.nextBook = null;
     log("My bookself is called " + this.name + ".");
 
+    this.listItemTemplate = function(text) {
+        var template = '<li class="list-group-item">' + text +'<button type="submit" class="btn btn-xs pull-right">mark as read</button></li>';
+        return template;
+    };
+
+    this.listItemCompletedTemplate = function(text) {
+        var template = '<li class="list-group-item">' + text +'<button type="submit" class="btn btn-xs pull-right">mark as unread</button></li>';
+        return template;
+    };
+
+    this.renderUpcoming = function() {
+        var upcomingList = document.getElementById("upcoming-list");
+        upcomingList.innerHTML = "";
+        for (var i=0; i<this.booksNotRead.length; i++) {
+            upcomingList.innerHTML += this.listItemTemplate(this.booksNotRead[i].bookTitle);
+        }
+    };
+
+     this.renderCompleted = function() {
+        var completedList = document.getElementById("completed-list");
+        completedList.innerHTML = "";
+        for (var i=0; i<this.booksRead.length; i++) {
+            completedList.innerHTML += this.listItemCompletedTemplate(this.booksRead[i].bookTitle);
+        }
+    };
+
     this.addBook = function(book) {
         this.bookShelf.push(book);
         log("You've added <strong>" + book.bookTitle + "</strong> to your your bookshelf.");
@@ -34,12 +60,12 @@ var BookList = function(name) {
         }
     };
 
-    this.finishCurrentBook = function() {
+    /*this.finishCurrentBook = function() {
         var currentBook = this.booksNotRead.pop();
         this.booksRead.push(currentBook);
         this.nextBook = this.booksNotRead[this.booksNotRead.length-1];
         log("You just finished reading" + currentBook.bookTitle + ". Your next book will be " + this.nextBook.bookTitle + ".");
-    };
+    };*/
 
 };
 
@@ -54,6 +80,7 @@ var penelopeDaughter = new Book("Penelope's Daughter", "historical fiction", "La
 var hobbit = new Book("The Hobbit", "fantasy", "J.R.R. Tolkien", false, null);
 
 var stephList = new BookList("Steph's List");
+
 // var jeeList = new BookList(numRead, numNotRead, nextBook, currentBook, lastBook, bookShelf);
 
 // var mylist = new BookList();
@@ -62,5 +89,6 @@ stephList.addBook(cleopatra);
 stephList.addBook(pridePrejudice);
 stephList.addBook(penelopeDaughter);
 stephList.addBook(hobbit);
-stephList.finishCurrentBook();
+stephList.renderUpcoming();
+stephList.renderCompleted();
 
