@@ -17,7 +17,7 @@ var BookList = function(name) {
     this.booksNotRead = [];
     this.bookShelf = [];
     this.nextBook = null;
-    log("My bookshelf is called " + this.name + ".");
+    //log("My bookshelf is called " + this.name + ".");
 
     this.listItemTemplate = function(text, id) {
         var template = '<li class="list-group-item">' + text +'<button id="' + id + '" class="btn btn-xs pull-right">mark as read</button></li>';
@@ -99,7 +99,6 @@ var BookList = function(name) {
                     this.listItemTemplate(this.bookShelf[i].bookTitle, i);
             }
         }
-
         for (i = 0; i < this.bookShelf.length; i ++) {
             this.addButtonClick(this.bookShelf[i], i);
         }
@@ -107,17 +106,31 @@ var BookList = function(name) {
 
     this.addBook = function(book) {
         this.bookShelf.push(book);
-        log("You've added <strong>" + book.bookTitle + "</strong> to your your bookshelf.");
+        //log("You've added <strong>" + book.bookTitle + "</strong> to your your bookshelf.");
 
-        if (book.read === true) {
-            this.booksRead.push(book);
-            log("You've added " + book.bookTitle + " to your list of completed books. You've read " + this.booksRead.length + " books.");
-        }
-        else {
-            this.booksNotRead.push(book);
-            log("You've added " + book.bookTitle + " to your list of books to read. You have " + this.booksNotRead.length + " books to read.");
-        }
+        // if (book.read === true) {
+        //     this.booksRead.push(book);
+        //     //log("You've added " + book.bookTitle + " to your list of completed books. You've read " + this.booksRead.length + " books.");
+        // }
+        // else {
+        //     this.booksNotRead.push(book);
+        //     //log("You've added " + book.bookTitle + " to your list of books to read. You have " + this.booksNotRead.length + " books to read.");
+        // }
     };
+
+    var submitNewBook = document.getElementById("submit");
+    var bookTitle = document.getElementById("bookTitle");
+    var author = document.getElementById("author");
+    var genre = document.getElementById("genre");
+    var imageURL = document.getElementById("imageURL");
+    var isRead = document.getElementById("isRead");
+    var self = this;
+    submitNewBook.addEventListener('click', function(){
+        var newBook = new Book(bookTitle.value, genre.value, author.value, isRead.checked);
+        self.addBook(newBook);
+        self.render();
+    }, false);
+
 
     /*this.finishCurrentBook = function() {
         var currentBook = this.booksNotRead.pop();
