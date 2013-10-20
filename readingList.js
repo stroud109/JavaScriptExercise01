@@ -29,6 +29,19 @@ var BookList = function(name) {
         return template;
     };
 
+    this.currentBookTemplate = function(book) {
+        var template = '<h4>Currently Reading</h4><div class="col-xs-6"><div class="thumbnail"><img src="http://placekitten.com/200/300"></div></div><div class="caption col-xs-6"><h3>' + book.bookTitle + '</h3><p><a href="#" id="finished" class="btn btn-primary">finished book</a></p></div>';
+        return template;
+    };
+
+    this.getCurrentBook = function() {
+        for (var i = 0; i < this.bookShelf.length; i++) {
+            if (this.bookShelf[i].read === false) {
+                return this.bookShelf[i];
+            }
+        }
+    };
+
     // this.renderUpcoming = function() {
     //     var upcomingList = document.getElementById("upcoming-list");
     //     upcomingList.innerHTML = "";
@@ -65,8 +78,17 @@ var BookList = function(name) {
     this.render = function() {
         var upcomingList = document.getElementById("upcoming-list");
         var completedList = document.getElementById("completed-list");
+        var currentBookElem = document.getElementById("currently-reading");
+        var currentBook = this.getCurrentBook();
         completedList.innerHTML = "";
         upcomingList.innerHTML = "";
+        if (currentBook) {
+            currentBookElem.innerHTML = this.currentBookTemplate(currentBook);
+            this.addButtonClick(currentBook, "finished");
+        }
+        else {
+            currentBookElem.innerHTML = "You don't have any more books to read";
+        }
         for (var i = 0; i < this.bookShelf.length; i++) {
             if (this.bookShelf[i].read) {
                 completedList.innerHTML +=
